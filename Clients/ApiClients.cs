@@ -14,7 +14,7 @@ namespace Clients
     public class ApiClient
     {
         private string _url;
-        private HttpClient _client;        
+        private readonly HttpClient _client;
         public ApiClient(string url,AuthenticationHeaderValue  authenticationHeaderValue=null)        
         {
             _url = url;
@@ -46,9 +46,9 @@ namespace Clients
                 t.Wait();            
                 return t.Result;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
         public ResponseClient Get(string source, string urlParams = null)
@@ -59,9 +59,9 @@ namespace Clients
                 t.Wait();
                 return t.Result;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
 }
         public string Put(string source, StringContent content)
@@ -76,19 +76,19 @@ namespace Clients
 		        t.Wait();
 		        return t.Result;
 	        }
-	        catch (Exception e)
+	        catch (Exception)
 	        {
-		        throw e;
+		        throw;
 	        }
         }
 
 
         private async Task<ResponseClient> PostAsync(string resource, StringContent content)
-        {
-            string responseString = "";
+        {          
             string url = string.Format("{0}{1}", _url, resource);
             try {                
-                HttpResponseMessage response = await _client.PostAsync(url, content);               
+                HttpResponseMessage response = await _client.PostAsync(url, content);
+                string responseString = string.Empty;
                 responseString = await response.Content.ReadAsStringAsync();
                 return new ResponseClient
                 {
@@ -96,17 +96,17 @@ namespace Clients
                     Content = responseString
                 };             
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
         private async Task<ResponseClient> GetAsync(string resource)
         {
-            string responseString = "";
             try
             {
                 var response = await _client.GetAsync($"{_url}{resource}");
+                string responseString = string.Empty;
                 responseString = await response.Content.ReadAsStringAsync();
                 return  new ResponseClient
                 {
@@ -114,27 +114,27 @@ namespace Clients
                     Content = responseString
                 };
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
         private async Task<ResponseClient> DeleteAsync(string resource)
-        {
-	        string responseString = "";
+        {	        
 	        try
 	        {
 		        var response = await _client.DeleteAsync($"{_url}{resource}");
-		        responseString = await response.Content.ReadAsStringAsync();
+                string responseString = string.Empty;
+                responseString = await response.Content.ReadAsStringAsync();
 		        return  new ResponseClient
 		        {
 			        StatusCode = response.StatusCode,
 			        Content = responseString
 		        };
 	        }
-	        catch (Exception e)
+	        catch (Exception)
 	        {
-		        throw e;
+		        throw;
 	        }
         }
 
