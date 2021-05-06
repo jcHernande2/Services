@@ -21,7 +21,7 @@ namespace Clients
             _client = new HttpClient();
             if (authenticationHeaderValue != null)
                 _client.DefaultRequestHeaders.Authorization = authenticationHeaderValue;
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+            ServicePointManager.SecurityProtocol =  SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;//SecurityProtocolType.Ssl3 | obsolet
         }
         public void SetCustomHeaders(Dictionary<string, string> headers)
         {
