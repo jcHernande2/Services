@@ -11,11 +11,11 @@ using Newtonsoft.Json.Linq;
 
 namespace Clients
 {  
-    public class ApiClient
+    public class HttpClientApi
     {
         private string _url;
         private readonly HttpClient _client;
-        public ApiClient(string url,AuthenticationHeaderValue  authenticationHeaderValue=null)        
+        public HttpClientApi(string url,AuthenticationHeaderValue  authenticationHeaderValue=null)        
         {
             _url = url;
             _client = new HttpClient();

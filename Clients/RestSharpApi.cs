@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Specialized;
-using System.Net;
-using System.Web.Script.Serialization;
 using RestSharp;
 
 
 namespace Services.Clients
 {
-    public class RestSharpClient
+    public class RestSharpApi
     {
         protected static readonly string DefaultContentType = "application/json";
 
@@ -16,7 +14,7 @@ namespace Services.Clients
         private readonly RestClient _client;
 
 
-        public RestSharpClient(string url, string token=null)
+        public RestSharpApi(string url, string token=null)
         {
             _url = url;
             _token = token;
