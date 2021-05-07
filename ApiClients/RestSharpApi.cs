@@ -2,7 +2,9 @@
 using System.Collections.Specialized;
 using RestSharp;
 using RestSharp.Authenticators;
-
+/*
+ * https://restsharp.dev/
+ */
 namespace Services.Clients
 {
     public class RestSharpApi
