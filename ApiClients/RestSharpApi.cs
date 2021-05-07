@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Specialized;
 using RestSharp;
-
+using RestSharp.Authenticators;
 
 namespace Services.Clients
 {
@@ -14,15 +14,18 @@ namespace Services.Clients
         private readonly RestClient _client;
 
 
-        public RestSharpApi(string url, string token=null)
+        public RestSharpApi(string url, string token = null)
         {
             _url = url;
             _token = token;
-            _client = new RestClient(url);
+            _client = new RestClient(url)
+            {
+                Authenticator = new SimpleAuthenticator("username", "user", "password", "pass"),
+            };
         }
-        private ResponseClient executeRequest(Method method, object Params)
+        private ResponseClient ExecuteRequest(string resource,Method method, object Params)
         {
-            var request = new RestRequest(method);
+            var request = new RestRequest(resource,method);
             var contentType = DefaultContentType;//GetRequestContentType();
             request.AddHeader("content-type", contentType);//"application/json");
             request.AddHeader("Authorization", "Basic " + _token);//this.State.AccessToken);
@@ -56,56 +59,51 @@ namespace Services.Clients
                 StatusCode = response.StatusCode
             };            
         }
-        public ResponseClient Execute(Method method,NameValueCollection callParams = null)
+        public ResponseClient Execute(string resource,Method method,NameValueCollection callParams = null)
         {
-            return executeRequest(method, callParams);
+            return ExecuteRequest(resource,method, callParams);
         }
-        public ResponseClient Get(string url,  NameValueCollection callParams = null)
+        public ResponseClient Get(string resource,  NameValueCollection callParams = null)
         {
-            var request = new RestRequest();
+            var request = new RestRequest(resource);
             IRestResponse response=_client.Get(request);
             return new ResponseClient
             {
                 Content = response.Content,
                 StatusCode = response.StatusCode
             };
-
         }
-        public ResponseClient Post(string url, string differentToken,  object data = null)
+        public ResponseClient Post(string resource,  object data = null)
         {
-            var request = new RestRequest();
+            var request = new RestRequest(resource);
             IRestResponse response = _client.Post(request);
             return new ResponseClient
             {
                 Content = response.Content,
                 StatusCode = response.StatusCode
             };
-
         }
 
-        public ResponseClient Put(string url,  object data)
+        public ResponseClient Put(string resource,  object data)
         {
-            var request = new RestRequest();
+            var request = new RestRequest(resource);
             IRestResponse response = _client.Put(request);
             return new ResponseClient
             {
                 Content = response.Content,
                 StatusCode = response.StatusCode
             };
-
         }
        
-        public ResponseClient Delete(string url, object data = null)
+        public ResponseClient Delete(string resource, object data = null)
         {
-            var request = new RestRequest();
+            var request = new RestRequest(resource);
             IRestResponse response = _client.Delete(request);
             return new ResponseClient
             {
                 Content = response.Content,
                 StatusCode = response.StatusCode
             };
-
-
         }
         
     }
