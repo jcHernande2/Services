@@ -10,7 +10,6 @@ namespace Services.Clients
     public class RestSharpApi
     {
         protected static readonly string DefaultContentType = "application/json";
-
         private readonly string _token;
         private readonly string _url;
         private readonly RestClient _client;
@@ -65,47 +64,80 @@ namespace Services.Clients
         {
             return ExecuteRequest(resource,method, callParams);
         }
-        public ResponseClient Get(string resource,  NameValueCollection callParams = null)
+        public ResponseClient Get(string resource,  NameValueCollection Params = null)
         {
-            var request = new RestRequest(resource);
-            IRestResponse response=_client.Get(request);
-            return new ResponseClient
+            try {
+                var request = new RestRequest(resource);
+                foreach (var param in Params)
+                {
+                   
+                    //request.AddParameter(Params.);
+                }
+                IRestResponse response=_client.Get(request);
+                return new ResponseClient
+                {
+                    Content = response.Content,
+                    StatusCode = response.StatusCode
+                };
+            }
+            catch (Exception)
             {
-                Content = response.Content,
-                StatusCode = response.StatusCode
-            };
+                throw;
+            }
         }
         public ResponseClient Post(string resource,  object data = null)
         {
-            var request = new RestRequest(resource);
-            IRestResponse response = _client.Post(request);
-            return new ResponseClient
+            try
             {
-                Content = response.Content,
-                StatusCode = response.StatusCode
-            };
+                var request = new RestRequest(resource);
+                IRestResponse response = _client.Post(request);
+                return new ResponseClient
+                {
+                    Content = response.Content,
+                    StatusCode = response.StatusCode
+                };
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public ResponseClient Put(string resource,  object data)
         {
-            var request = new RestRequest(resource);
-            IRestResponse response = _client.Put(request);
-            return new ResponseClient
+            try
             {
-                Content = response.Content,
-                StatusCode = response.StatusCode
-            };
+                var request = new RestRequest(resource);
+                IRestResponse response = _client.Put(request);
+                return new ResponseClient
+                {
+                    Content = response.Content,
+                    StatusCode = response.StatusCode
+                };
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
        
         public ResponseClient Delete(string resource, object data = null)
         {
-            var request = new RestRequest(resource);
-            IRestResponse response = _client.Delete(request);
-            return new ResponseClient
+            try
             {
-                Content = response.Content,
-                StatusCode = response.StatusCode
-            };
+                var request = new RestRequest(resource);
+                IRestResponse response = _client.Delete(request);
+                return new ResponseClient
+                {
+                    Content = response.Content,
+                    StatusCode = response.StatusCode
+                    //response.StatusDescription
+                };
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
         
     }
