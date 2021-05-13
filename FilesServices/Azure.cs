@@ -2,6 +2,7 @@
 using System.IO;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
+using System.Configuration;
 
 namespace Services.FilesServices
 {
@@ -9,15 +10,16 @@ namespace Services.FilesServices
     {
         private readonly CloudBlobClient _blobClient;
         private static Azure _instance;
-        private Azure(string connection)
+        private Azure()
         {
+            string connection=ConfigurationManager.AppSettings["connection"];
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(connection);
              _blobClient = storageAccount.CreateCloudBlobClient();
         }
-        public static Azure GetInstance(string connection)
+        public static Azure GetInstance()
         {
               if(_instance==null){                 
-                 _instance= new Azure(connection);                	
+                 _instance= new Azure();                	
               }
               return _instance;
         }
