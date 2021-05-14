@@ -31,9 +31,7 @@ namespace Services.FilesServices
                 
                 using (FileStream sw = File.Create(path))
                 {
-                    /*sw.WriteLine("Hello");
-                    sw.WriteLine("And");
-                    sw.WriteLine("Welcome");*/
+                   
                 }
                 
             }
