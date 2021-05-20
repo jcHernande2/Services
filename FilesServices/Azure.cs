@@ -6,13 +6,13 @@ using System.Configuration;
 
 namespace Services.FilesServices
 {
-    public class Azure
+    public class Azure: IFileServices
     {
         private readonly CloudBlobClient _blobClient;
         private static Azure _instance;
         private Azure()
         {
-            string connection=ConfigurationManager.AppSettings["connection"];
+            string connection=ConfigurationManager.AppSettings["AzureConnection"];
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(connection);
              _blobClient = storageAccount.CreateCloudBlobClient();
         }
