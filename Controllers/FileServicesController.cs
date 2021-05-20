@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Services.FilesServices;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -23,6 +24,8 @@ namespace Services.Controllers
         [HttpGet("{id}")]
         public string Get(int id)
         {
+            var instance=FileManager.GetInstance(new Setting { FileServiceType= FileServiceType.Azure, Name="Azure"});
+            
             return "value";
         }
 
