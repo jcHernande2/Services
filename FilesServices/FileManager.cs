@@ -19,20 +19,25 @@ namespace Services.FilesServices
     }
     public class FileManager
     {
-        private static IFileServices _instance;
-        public static IFileServices GetInstance(Setting setting)
+        private static FileManager _instance;
+        private IFileServices _fileServices;
+        private FileManager(Setting setting) {
+            Assembly assem = typeof(IFileServices).Assembly;
+            _fileServices = (IFileServices)assem.CreateInstance($"Services.FilesServices.{setting.Name}"
+                , true, BindingFlags.Default, null, new object[] { setting }, null, null);
+        }
+        public static FileManager GetInstance(Setting setting)
         {
             if (_instance == null)
             {
-                Assembly assem = typeof(IFileServices).Assembly;
-                _instance = (IFileServices)assem.CreateInstance($"Services.FilesServices.{setting.Name}"
-                    , true, BindingFlags.Default, null, new object[] { setting }, null, null);               
+                _instance=new FileManager(setting);
+               
             }
             return _instance;
         }
         public bool Save()
         {
-           
+            //_fileService
             return true;
         }
         public string Read()

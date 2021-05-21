@@ -9,20 +9,20 @@ namespace Services.FilesServices
     public class AzureStorage: IFileServices
     {
         private readonly CloudBlobClient _blobClient;
-        private static AzureStorage _instance;
-        private AzureStorage()
+        //private static AzureStorage _instance;
+        public AzureStorage()
         {
             string connection=ConfigurationManager.AppSettings["AzureConnection"];
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(connection);
              _blobClient = storageAccount.CreateCloudBlobClient();
         }
-        public static AzureStorage GetInstance()
+        /*public static AzureStorage GetInstance()
         {
               if(_instance==null){                 
                  _instance= new AzureStorage();                	
               }
               return _instance;
-        }
+        }*/
         public bool UploadBlobFromStream(string containerName, string fileName, MemoryStream stream)
         {
             if (string.IsNullOrEmpty(containerName) && string.IsNullOrEmpty(fileName))
