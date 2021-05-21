@@ -6,20 +6,20 @@ using System.Configuration;
 
 namespace Services.FilesServices
 {
-    public class Azure: IFileServices
+    public class AzureStorage: IFileServices
     {
         private readonly CloudBlobClient _blobClient;
-        private static Azure _instance;
-        private Azure()
+        private static AzureStorage _instance;
+        private AzureStorage()
         {
             string connection=ConfigurationManager.AppSettings["AzureConnection"];
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(connection);
              _blobClient = storageAccount.CreateCloudBlobClient();
         }
-        public static Azure GetInstance()
+        public static AzureStorage GetInstance()
         {
               if(_instance==null){                 
-                 _instance= new Azure();                	
+                 _instance= new AzureStorage();                	
               }
               return _instance;
         }

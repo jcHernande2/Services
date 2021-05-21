@@ -30,5 +30,14 @@ namespace Services.FilesServices
             }
             return _instance;
         }
+        public bool Save()
+        {
+           
+            return true;
+        }
+        public string Read()
+        {
+            return "";
+        }
     }
 }

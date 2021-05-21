@@ -7,20 +7,20 @@ using System.Threading.Tasks;
 
 namespace Services.FilesServices
 {
-    public class Local
+    public class LocalStrorage
     {
        
-        private static Local _instance;
-        private Local()
+        private static LocalStrorage _instance;
+        private LocalStrorage()
         {
             string url = ConfigurationManager.AppSettings["dir"];
            
         }
-        public static Local GetInstance()
+        public static LocalStrorage GetInstance()
         {
             if (_instance == null)
             {
-                _instance = new Local();
+                _instance = new LocalStrorage();
             }
             return _instance;
         }

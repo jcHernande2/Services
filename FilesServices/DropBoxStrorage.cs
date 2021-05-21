@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Services.FilesServices
 {
-    public class DropBox
+    public class DropBoxStrorage
     {
     }
 }

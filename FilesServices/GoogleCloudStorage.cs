@@ -7,21 +7,21 @@ using Google.Cloud.Storage.V1;
 
 namespace Services.FilesServices
 {
-    public class GoogleCloud
+    public class GoogleCloudStorage
     {
         
         private readonly StorageClient _storageClient;
-        private static GoogleCloud _instance;
-        private GoogleCloud()
+        private static GoogleCloudStorage _instance;
+        private GoogleCloudStorage()
         {
             string connection = ConfigurationManager.AppSettings["connection"];
             _storageClient = StorageClient.Create();
         }
-        public static GoogleCloud GetInstance()
+        public static GoogleCloudStorage GetInstance()
         {
             if (_instance == null)
             {
-                _instance = new GoogleCloud();
+                _instance = new GoogleCloudStorage();
             }
             return _instance;
         }

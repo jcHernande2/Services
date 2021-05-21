@@ -7,20 +7,20 @@ using Clients;
 
 namespace Services.FilesServices
 {
-    public class Server
+    public class RemoteServerStorage
     {
         private  HttpClientApi _apiClient;
-        private static Server _instance;
-        private Server()
+        private static RemoteServerStorage _instance;
+        private RemoteServerStorage()
         {
             string connection = ConfigurationManager.AppSettings["connection"];
             _apiClient = new HttpClientApi("localhost");
         }
-        public static Server GetInstance()
+        public static RemoteServerStorage GetInstance()
         {
             if (_instance == null)
             {
-                _instance = new Server();
+                _instance = new RemoteServerStorage();
             }
             return _instance;
         }
