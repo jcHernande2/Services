@@ -5,7 +5,17 @@ using System.Threading.Tasks;
 
 namespace Services.FilesServices.Models
 {
-    public class TypeServiceModel
+    public enum FileServiceType
     {
+        Aws,
+        Azure,
+        Box,
+        DropBox,
+        Google,
+        GoogleDive,
+        Local,
+        OneDrive,
+        RemoteServer,
     }
+   
 }

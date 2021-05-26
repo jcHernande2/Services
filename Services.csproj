@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <Folder Include="EmailServices\Models\" />
-    <Folder Include="FilesServices\Models\" />
   </ItemGroup>
 
 </Project>

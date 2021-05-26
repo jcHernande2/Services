@@ -3,15 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Services.FilesServices.Models;
 
 namespace Services.FilesServices
 {
-    public enum FileServiceType
-    {
-        Azure,
-        Google,
-        Server
-    }
+    
     public class Setting
     {
         public FileServiceType FileServiceType { get;set; }
@@ -35,12 +31,12 @@ namespace Services.FilesServices
             }
             return _instance;
         }
-        public bool Save()
+        public bool Upload()
         {
             //_fileService
             return true;
         }
-        public string Read()
+        public string Download()
         {
             return "";
         }
