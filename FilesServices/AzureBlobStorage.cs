@@ -6,11 +6,11 @@ using System.Configuration;
 
 namespace Services.FilesServices
 {
-    public class AzureStorage: IFileServices
+    public class AzureBlobStorage: IFileServices
     {
         private readonly CloudBlobClient _blobClient;
         //private static AzureStorage _instance;
-        public AzureStorage()
+        public AzureBlobStorage()
         {
             string connection=ConfigurationManager.AppSettings["AzureConnection"];
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(connection);
@@ -50,7 +50,7 @@ namespace Services.FilesServices
             {
                 CloudBlockBlob blockBlob = GetBlockBlob(containerName, fileName);
                 using (MemoryStream stream = new MemoryStream())
-                {
+                {                    
                     blockBlob.DownloadToStreamAsync(stream);
                     byte[] buff = stream.ToArray();
                     return Convert.ToBase64String(buff);                   

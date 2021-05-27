@@ -16,7 +16,7 @@ namespace Services.FilesServices
     public class FileManager
     {
         private static FileManager _instance;
-        private IFileServices _fileServices;
+        private readonly IFileServices _fileServices;
         private FileManager(Setting setting) {
             Assembly assem = typeof(IFileServices).Assembly;
             _fileServices = (IFileServices)assem.CreateInstance($"Services.FilesServices.{setting.Name}"
